@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+	<object Name="CRYPTOGEOLOGY_Finish_TravelToDigSite" Inherits="Widget">
+    <part Name="QuestStepFinisher" Trigger="Created" Quest="The Dig" Step="Travel to the Dig Site" />
+  </object>
+
+	<object Name="CRYPTOGEOLOGY_DigSiteSpawner" Inherits="Widget">
+    <part Name="CRYPTOGEOLOGY_DigSiteSpawner" />
+  </object>
+
+	<object Name="CRYPTOGEOLOGY_StiltSpawner" Inherits="Widget">
+    <part Name="CRYPTOGEOLOGY_StiltSpawner" />
+  </object>
+</objects>

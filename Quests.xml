@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<quests>
+  <quest Name="Retrieve a Spare Part for the Excavator" Level="3"
+       Accomplishment="You fetched a replacement part for a cryptogeologist's excavator."
+       Hagiograph="=name= commissioned a study of unusual stones from an innovative geologist."
+       HagiographCategory="Trysts">
+
+    <step Name="Retrieve a Spare Part" XP="0">
+      <text>Get a spare part from Q Girl.</text>
+    </step>
+
+    <step Name="Return to Prozeman" XP="800">
+      <text>Return to Prozeman with the spare part.</text>
+    </step>
+  </quest>
+
+  <quest Name="Retrieve Another Spare Part for the Excavator" Level="3"
+       Accomplishment="You fetched another replacement part for a cryptogeologist's excavator."
+       Hagiograph="In patient wisdom, =name= showed continued support for the study of unusual stones."
+       HagiographCategory="Trysts">
+
+    <step Name="Retrieve a Spare Part" XP="0">
+      <text>Get a spare part from Yla Haj.</text>
+    </step>
+
+    <step Name="Return to Prozeman" XP="1000">
+      <text>Return to Prozeman with the spare part.</text>
+    </step>
+  </quest>
+
+  <quest Name="Retrieve Yet Another Spare Part for the Excavator" Level="3"
+       Accomplishment="You fetched yet another replacement part for a cryptogeologist's excavator."
+       Hagiograph="=name= taught perservearance and dedication to an innovative geologist."
+       HagiographCategory="Trysts">
+
+    <step Name="Retrieve a Spare Part" XP="0">
+      <text>Get a spare part from Bep.</text>
+    </step>
+
+    <step Name="Return to Prozeman" XP="2000">
+      <text>Return to Prozeman with the spare part.</text>
+    </step>
+  </quest>
+
+  <quest Name="The Dig" Level="3"
+       Accomplishment="You witnessed the discovery of and conversed with the Neurolith."
+       Hagiograph="=name= held an accord with the Canyon Carver of old, and graciously agreed to carry its wisdom despite its past transgressions."
+       HagiographCategory="Trysts">
+
+    <step Name="Travel to the Dig Site" XP="250">
+      <text>Travel to Prozeman's dig site 4 parasangs west of the Six Day Stilt.</text>
+    </step>
+
+    <step Name="Attend the Dig" XP="1000">
+      <text>Join Prozeman and see if the excavator unearths anything.</text>
+    </step>
+
+    <step Name="Report to Prozeman" XP="2000">
+      <text>If the excavator unearths anything, give Prozeman your account.</text>
+    </step>
+  </quest>
+</quests>

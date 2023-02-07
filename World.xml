@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<worlds>
+  <world Name="JoppaWorld" Load="Merge">
+
+    <cell Name="CRYPTOGEOLOGY_DigSite" Inherits="SaltDesertCell"
+          ApplyTo="CRYPTOGEOLOGY_TerrainDigSite"
+          Mutable="false" >
+
+      <zone Level="10" x="1" y="1" Name="The Dig Site" ProperName="true" HasWeather="true" WindSpeed="0-100" WindDirections="NW,NW,W,W,SW" WindDuration="50-3000">
+        <builder Class="SaltDunes"></builder>
+        <map FileName="DigSite.rpm"></map>
+        <builder Class="Music" Track="MoghrayiRemembrance" Chance="10"></builder>
+      </zone>
+    </cell>
+
+  </world>
+</worlds>

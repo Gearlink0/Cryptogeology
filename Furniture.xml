@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+  <object Name="CRYPTOGEOLOGY_ExactingExcavator" Inherits="InorganicObject">
+      <part Name="Render" DisplayName="exacting excavator" Tile="items/ExactingExcavator.png" RenderLayer="6" RenderString="=" ColorString="&amp;y" DetailColor="Y" Occluding="true" />
+      <part Name="Physics" Weight="300" Takeable="false" Solid="true" Owner="Pariahs" />
+      <part Name="CRYPTOGEOLOGY_ExactingExcavator" />
+      <part Name="Metal" />
+      <part Name="MentalShield" />
+      <stat Name="AV" Value="20" />
+      <stat Name="Hitpoints" Value="100" />
+      <part Name="Corpse" CorpseChance="100" CorpseBlueprint="Rubble" />
+      <part Name="Description" Short="As a butcher's knife is to a scalpel, so is a spade to this contrivance of oil-slicked tubes and gently humming blades." />
+      <part Name="Interesting" />
+      <part Name="Inventory" />
+      <tag Name="NoTrade" />
+    </object>
+</objects>

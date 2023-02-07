@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<conversations>
+  <conversation ID="CRYPTOGEOLOGY_Cryptogeologist">
+    <start IfHaveActiveQuest="Retrieve a Spare Part for the Excavator">
+      <text>
+        You return. Do you have the spare part?
+      </text>
+      <choice GotoID="HasPart1" IfHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" TakeItem="CRYPTOGEOLOGY_ExcavatorPart">
+        <text>Yes, here it is.</text>
+        <part Name="ReceiveItem" Blueprints="Rough Topaz" />
+        <part Name="QuestHandler" QuestID="Retrieve a Spare Part for the Excavator" Action="Complete" />
+      </choice>
+      <choice GotoID="WhereReminder1">Where would I find this replacement again?</choice>
+      <choice GotoID="End">Not yet.</choice>
+    </start>
+
+    <start IfFinishedQuest="Retrieve a Spare Part for the Excavator" IfNotHaveQuest="Retrieve Another Spare Part for the Excavator">
+      <text>
+        You return. Have you reconsidered my offer? Do another job for more gems?
+      </text>
+      <choice GotoID="WhereReplacement2">I have.</choice>
+      <choice GotoID="End">I have not.</choice>
+    </start>
+
+    <start IfHaveActiveQuest="Retrieve Another Spare Part for the Excavator">
+      <text>
+        You return. Do you have the spare part?
+      </text>
+      <choice GotoID="HasPart2" IfHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" TakeItem="CRYPTOGEOLOGY_ExcavatorPart">
+        <text>Yes, here it is.</text>
+        <part Name="ReceiveItem" Blueprints="Rough Agate,Rough Emerald" />
+        <part Name="QuestHandler" QuestID="Retrieve Another Spare Part for the Excavator" Action="Complete" />
+      </choice>
+      <choice GotoID="WhereReminder2">Where would I find this replacement again?</choice>
+      <choice GotoID="End">Not yet.</choice>
+    </start>
+
+    <start IfFinishedQuest="Retrieve Another Spare Part for the Excavator" IfNotHaveQuest="Retrieve Yet Another Spare Part for the Excavator">
+      <text>
+        You return. Have you reconsidered my offer? Do another job for more gems?
+      </text>
+      <choice GotoID="WhereReplacement3">I have.</choice>
+      <choice GotoID="End">I have not.</choice>
+    </start>
+
+    <start IfHaveActiveQuest="Retrieve Yet Another Spare Part for the Excavator">
+      <text>
+        You return. Do you have the spare part?
+      </text>
+      <choice GotoID="HasPart3" IfHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" TakeItem="CRYPTOGEOLOGY_ExcavatorPart">
+        <text>Yes, here it is.</text>
+        <part Name="ReceiveItem" Blueprints="Rough Amethyst,Rough Peridot" />
+        <part Name="QuestHandler" QuestID="Retrieve Yet Another Spare Part for the Excavator" Action="Complete" />
+      </choice>
+      <choice GotoID="WhereReminder3">Where would I find this replacement again?</choice>
+      <choice GotoID="End">Not yet.</choice>
+    </start>
+
+    <start IfFinishedQuest="Retrieve Yet Another Spare Part for the Excavator" IfNotHaveActiveQuest="The Dig" IfNotHaveState="CRYPTOGEOLOGY_CryptogeologistMoved">
+      <text>
+        You return. As you can see, I still am in the process of packing the excavator.
+
+        Have you reconsidered? Join me for the discovery of a lifetime?
+      </text>
+      <choice ID="TheDigChoice" GotoID="TheDig" StartQuest="The Dig">Yes stone-seeker, I will join you.</choice>
+      <choice GotoID="End">I have not.</choice>
+    </start>
+
+    <start IfHaveActiveQuest="The Dig" IfNotHaveState="CRYPTOGEOLOGY_CryptogeologistMoved">
+      <text>
+        Apologies, I am as eager to leave as you, but I need to pack up the excavator first.
+
+        But please, go ahead! I shall meet you at the site. Remember, 4 parasangs west of here!
+      </text>
+      <choice Target="End">See you soon. Live and drink.</choice>
+    </start>
+
+    <start IfHaveActiveQuest="The Dig" IfNotFinishedQuestStep="The Dig~Attend the Dig" IfHaveState="CRYPTOGEOLOGY_NeurolithSpawned">
+      &amp;w*Prozeman does not react to you as =pronouns.subjective= faces the unearthed fossil.*
+      <choice GotoID="End">...</choice>
+    </start>
+
+    <start IfHaveActiveQuest="The Dig" IfNotFinishedQuestStep="The Dig~Attend the Dig" IfHaveState="CRYPTOGEOLOGY_ExcavatorStarted">
+      Nothing so far. Nothing but halite. But it's here, just wait.
+      <choice GotoID="End">...</choice>
+    </start>
+
+    <start IfHaveActiveQuest="The Dig" IfNotFinishedQuestStep="The Dig~Attend the Dig" IfHaveState="CRYPTOGEOLOGY_CryptogeologistMoved">
+      <text>
+        Oh, all the sweating over spare parts has made this moment all the sweeter. I can taste it =name=! The ethereal tremors on my papilae. Neurolith lurks below us!
+
+        Shall we?
+      </text>
+      <choice Target="StartExcavator">
+        <text>Start the excavator!</text>
+        <part Name="CRYPTOGEOLOGY_StartTheExcavator" />
+      </choice>
+    </start>
+
+    <start IfHaveActiveQuest="The Dig" IfFinishedQuestStep="The Dig~Attend the Dig">
+      <text>
+        &amp;w*Prozeman sifts numbly through the remains of the neurolith.*&amp;y
+
+        It was here. I could have touched it, tasted it, traced the crystaline structures, weighed the carbon's age. It was here.
+      </text>
+      <choice GotoID="CalmWisdom">You didn't know. We didn't know.</choice>
+      <choice GotoID="CalmWisdom">All is not lost. There are still bits of the fossil.</choice>
+      <choice GotoID="CalmWisdom">But we heard it. We know it is real.</choice>
+    </start>
+
+    <node ID="CalmWisdom">
+      You speak calm wisdom =player.formalAddressTerm=. We still have the readings of the excavator, our own accounts, and what looks like a few small samples. All will be well.
+
+      &amp;w*Prozeman produces a small device which has a speaker and disk.*&amp;y
+
+      What happened when the neurolith was unearthed?
+      <choice GotoID="Ancient">An ancient creature's mind lived in that stone. Through telepathic waves, it spoke to me. It imparted its wisdom, mistaking me for one of its brood.</choice>
+      <choice GotoID="LastWords">The last words of a primordial progenitor to its spawn were preserved in the rock. The psychic tremors freed them and cast them into my mind.</choice>
+      <choice GotoID="OldMemories">Old memories clung to the fossil. For a moment, I was a small, squirming burrower absorbing its mother's wisdom.</choice>
+      <choice GotoID="DontKnow">Honestly, I cannot put into words what I experienced.</choice>
+    </node>
+
+    <node ID="Ancient">
+      Thank you, your account is invaluable, and largely fits with my own.
+
+      I am not so certain the mind within the fossil was alive. It seemed... stuck. Like a recording of thoughs instead of a living mind. Perhaps a consequence of the fossil's rigid mineral structure?
+
+      It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
+      <choice ID="RewardChoice" GotoID="Reward">Then I will leave you to your research.</choice>
+    </node>
+
+    <node ID="LastWords">
+      Thank you, your account is invaluable, and largely fits with my own.
+
+      I am not sure the words were heard were merely static, preserved in rock as an insect in amber. Whatever I spoke to sometimes responded, as though it could perceive me. But not always? Perhaps its senses were limited in some fashion?
+
+      It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
+      <choice UseID="RewardChoice"/>
+    </node>
+
+    <node ID="OldMemories">
+      Thank you, your account is invaluable, and largely fits with my own.
+
+      I heard a mother's wisdom, though did not feel as though I were changed or transported. Of course, we are different minds, subject to different interpretations. I will need to seek council with a scholar of psychic phenomena.
+
+      It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
+      <choice UseID="RewardChoice"/>
+    </node>
+
+    <node ID="DontKnow">
+      Unfortunate, but I understand.
+
+      From my perspective, it appears as though we received a telepathic transmission from the psychically active Neuralith. But the details are... hazy. Hopefully the few samples remaining will be illuminating.
+
+      It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
+      <choice UseID="RewardChoice"/>
+    </node>
+
+    <node ID="Reward">
+      Wait, before you go.
+
+      &amp;w*Prozeman delicately plucks one of the larger chunks of fossil from the rubble and offers it to you. The hum of a soft memory still clings to the pebble.*&amp;y
+
+      Here. Normally, I would balk at giving up such a sample. But you spoke to it, and received its wisdom as well. Passing this on feels, appropriate.
+      <choice GotoID="End">
+        <text>A generous gift, thank you stone seeker. Live and drink</text>
+        <part Name="ReceiveItem" Pick="true" Table="CRYPTOGEOLOGY_TheDigReward" Identify="All" />
+        <part Name="QuestHandler" QuestID="The Dig" Action="Complete" />
+      </choice>
+    </node>
+
+    <start IfFinishedQuest="The Dig">
+      <text>
+        Live and drink =player.formalAddressTerm=.
+      </text>
+      <choice ID="MoreWorkChoice" GotoID="MoreWork">Do you have any more work?</choice>
+      <choice ID="ResearchChoice" GotoID="Research">How does the research on the neurolith?</choice>
+      <choice Target="End">Live and drink.</choice>
+    </start>
+
+    <node ID="MoreWork">
+      <text>
+        Yes actually! The excavator has broken down once more. This part was made by a tinker out of Eyn Roj.
+
+        &amp;w*Prozeman chuckles*&amp;y
+
+        Apologies. But no, I've no need for a courier at the moment. Rest your limbs =player.formalAddressTerm=.
+      </text>
+      <choice UseID="ResearchChoice"/>
+      <choice Target="End">Live and drink.</choice>
+    </node>
+
+    <node ID="Research">
+      <text>
+        It goes well! Slowly, but well. I must be methodical and thorough with the samples we retreived.
+      </text>
+      <choice UseID="MoreWorkChoice"/>
+      <choice Target="End">Live and drink.</choice>
+    </node>
+
+    <start ID="Welcome">
+      <text>
+        Live and drink, =player.formalAddressTerm=. Do you need work? Do you wish to advance the field of cryptogeology?
+
+        I have need of a courier and the gems with which to pay.
+      </text>
+      <choice ID="CryptogeologyChoice" GotoID="Cryptogeology">Cryptogeology?</choice>
+      <choice ID="ContraptionChoice" GotoID="Contraption">What is that contraption beside you?</choice>
+      <choice Target="Job">What is the job?</choice>
+      <choice Target="End">Live and drink.</choice>
+    </start>
+
+    <node ID="Cryptogeology">
+      The study of cryptites: mysterious and legendary examples of mineral structures which science has yet to find proper samples.
+      <choice Target="DontExist">It sounds like a false-science.</choice>
+      <choice Target="Interesting">It sounds interesting.</choice>
+    </node>
+
+    <node ID="DontExist">
+      Cryptogeology is admittedly a field which is rife with charlatans and uncorroborated folk tales. But I assure you, there is sound science to be done and I will not have it all dismissed as nonsense.
+      <choice UseID="ContraptionChoice"/>
+      <choice Target="Job">Whatever. You said you had gems?</choice>
+    </node>
+
+    <node ID="Interesting">
+      It is fascinating. If you like, there is a complete record of the cryptites I am familiar with available in my book. Regretfully, I must insist on trading barter or water for it to cover the costs of production. Scribes are not cheap.
+      <choice Target="Book">You lack eyes. How did you write a book?</choice>
+      <choice Target="Job">You said you needed a courier?</choice>
+    </node>
+
+    <node ID="Book">
+      I am blessed with a form of clear sight which relies on the mind instead of light sensitive organs.
+
+      But its frequent use gives me headaches, so I keep notes with texture-script and a device that cuts and reads noises upon a disk. I then dictated to a scribe to produce the copies for distribution.
+      <choice UseID="ContraptionChoice"/>
+      <choice Target="Job">You said you needed a courier?</choice>
+    </node>
+
+    <node ID="Contraption">
+      Oh, this is my excavator: scientific instrument and digging tool in one. My own claws tear through rock well enough but cannot do so with the same finesse and care as this wonder. With it I've no worry of a destroyed or lost sample during a cryptogeologic survey.
+      <choice UseID="CryptogeologyChoice"/>
+      <choice Target="Rickety">It looks... rickety.</choice>
+      <choice Target="Job">You said you needed a courier?</choice>
+    </node>
+
+    <node ID="Rickety">
+      It is admitedly a delicate thing. Many tinkers have helped build and add to it over the years. Its patchwork design functions but is... well as you say: rickety. It's why I need a courier, actually.
+      <choice UseID="CryptogeologyChoice"/>
+      <choice Target="Job">Why do you need a courier?.</choice>
+      <choice GotoID="End">I am not interested in courier work. Live and drink.</choice>
+    </node>
+
+    <node ID="Job">
+      You see, I have reason to believe I have located a promising site for excavation. But, frustratingly, a crucial component of my excavator has broken down. A temperamental thing it is. Without this piece it won’t work at all.
+
+      All I need you to do is fetch me a replacement.
+      <choice ID="WhereReplacement1Choice" GotoID="WhereReplacement1">Where can I find the replacement?</choice>
+      <choice ID="YourselfChoice" GotoID="Yourself">Why not do this yourself?</choice>
+      <choice ID="TinkerChoice" GotoID="Tinker">Why not find a tinker among the Stiltgrounds?</choice>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="WhereReplacement1">
+      The broken part was originally crafted by &amp;mQ Girl&amp;y of Grit Gate. When I commissioned her work, I arranged for her to supply spares in the future. She should require no further payment to furnish you with a replacement.
+
+      Though you may have some trouble arranging a meeting with her. They keep their doors locked tight in Grit Gate.
+
+      <choice Target="Quest1" StartQuest="Retrieve a Spare Part for the Excavator">I shall fetch you the part.</choice>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="WhereReminder1">
+      &amp;mQ Girl&amp;y of Grit Gate should have the part. I arranged for her to supply me with spares, so she should require no further payment to give you the replacement.
+
+      <choice Target="End">My thanks, live and drink.</choice>
+    </node>
+
+    <node ID="Yourself">
+      I travel slow when burdened by the excavator, and I dare not leave without it.
+      <choice UseID="WhereReplacement1Choice"/>
+      <choice UseID="TinkerChoice"/>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="Tinker">
+      I have tried, but it is a tangled bird's nest of tinker work. In my experience, unframiliar makers, even skilled ones, tend to break as much as they fix.
+      <choice UseID="WhereReplacement1Choice"/>
+      <choice UseID="YourselfChoice"/>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="Quest1">
+      Excellent! Be swift and safe =player.formalAddressTerm=. I will eagerly await your return.
+      <choice Target="End">Live and drink.</choice>
+    </node>
+
+    <node ID="HasPart1">
+      Fantastic!
+
+      &amp;w*Prozeman takes the part and shoves it into a gaping access panel of the excavator. The machine rumbles and sighs, then lets out a sharp pop.*&amp;y
+
+      Confound it! You fix one thing…
+
+      &amp;w*Prozeman opens a different access panel which lets out a billow of smoke. =pronouns.Subjective= rummages around with =pronouns.possessive= papillae before retrieving a handful of excavator guts that smell of burnt plastic and oil.*&amp;y
+
+      Yes, it seems like another part broke. I don't suppose you would be available for another job?
+      <choice Target="WhereReplacement2">I would.</choice>
+      <choice Target="End">One fetching job was enough. Live and drink.</choice>
+    </node>
+
+    <node ID="WhereReplacement2">
+      This part was made by Yla Haj of Ezra. As before, I’ve an agreement with her to supply spares so this should be another quick errand.
+
+      Ezra is a friendly enough place, though step with caution through the grove. The trees there are grabby.
+
+      <choice Target="Quest2" StartQuest="Retrieve Another Spare Part for the Excavator">I shall fetch you the part.</choice>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="WhereReminder2">
+      Yla Haj of Ezra should have the part. She should require no further payment to give you the replacement.
+
+      <choice Target="End">My thanks, live and drink.</choice>
+    </node>
+
+    <node ID="Quest2">
+      Many thanks =player.formalAddressTerm=. I will await your return.
+      <choice Target="End">Live and drink.</choice>
+    </node>
+
+    <node ID="HasPart2">
+      You lift my spirits =player.formalAddressTerm=.
+
+      &amp;w*Prozeman slots the new replacement into the second access panel of the machine. Its pistons hiss and its digging blades turn experimentally. But then there is a loud crack and angry buzzers begin shouting from the control panel.*&amp;y
+
+      Oh by the silt and loam what now? This is getting preposterous.
+
+      &amp;w*The cryptogeologist examines the controls, then opens a hatch beneath them to extract another burnt component.*&amp;y
+
+      Another one. I don’t know what to say, I’ve never had this much trouble with this thing before.
+      <choice Target="WhereReplacement3">I've come this far. Where can I find the replacement this time?</choice>
+      <choice Target="End">This machine will never work. Fix it without me.</choice>
+    </node>
+
+    <node ID="WhereReplacement3">
+      Unfortunately, this part was made by Bep, a denizen of the Yd Freehold.
+
+      I've no grievance with him, but it is not a particularly pleasant journey. So many deaths stalk the reef.
+      <choice Target="Quest3" StartQuest="Retrieve Yet Another Spare Part for the Excavator">I shall fetch you the part.</choice>
+      <choice Target="End">This job does not suit me. Live and drink.</choice>
+    </node>
+
+    <node ID="WhereReminder3">
+      Bep of the Yd Freehold should have the part. He should require no further payment to give you the replacement.
+
+      <choice Target="End">My thanks, live and drink.</choice>
+    </node>
+
+    <node ID="Quest3">
+      Many thanks =player.formalAddressTerm=. I will await your return.
+      <choice Target="End">Live and drink.</choice>
+    </node>
+
+    <node ID="HasPart3">
+      &amp;w*The cryptogeologist winces as =pronouns.subjective= inserts the replacement. All =pronouns.possessive= claws and papillae are tensed as the excavator once more springs to life. Its pipes shiver. Its blades whir. A series of triumphant dings issue from the control panel. *&amp;y
+
+      Oh it lives. IT LIVES! Joyous day. You have my endless thanks for all you have done =name=.
+
+      I must be off =player.formalAddressTerm=; the dig site calls and I cannot wait any longer. But, would you like to come with me? See this beauty put to work? With good fortune, be there at the discovery of an entirely new mineral?
+      <choice ID="TheDigChoice" GotoID="TheDig" StartQuest="The Dig">Yes stone-seeker, I will join you.</choice>
+      <choice Target="End">I have better things to be doing. Live and drink.</choice>
+    </node>
+
+    <node ID="TheDig">
+      I am glad to hear so. Another first hand account of what we discover will be invaluable.
+
+      I will need to pack up the excavator first but please, go ahead and I shall meet you at the site! It is 4 parasangs due west of here.
+      <choice Target="End">See you soon. Live and drink.</choice>
+    </node>
+
+    <node ID="StartExcavator">
+      &amp;w*Prozeman fiddles with the control panel and the excavator whirs to clattering life. The device spits out a melody of situation normal tones. Its blades hum as they hungrily gnash at the bare earth.*&amp;y
+
+      &amp;w*Then they are gone, disappeared into the ground as sharp fish into water. Perfect blocks of sliced salt crystals and rock are carved from the ground, passed up the contraption, and set down in orderly piles.*&amp;y
+
+      And now, we wait.
+      <choice Target="End">...</choice>
+    </node>
+
+  </conversation>
+
+
+  <conversation ID="Q Girl" Load="Merge">
+    <node ID="Start" IfNotFinishedQuest="More Than a Willing Spirit" Load="Merge">
+      <choice IfHaveActiveQuest="Retrieve a Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+        <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
+        <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
+      </choice>
+    </node>
+
+    <node ID="Start" IfHaveActiveQuest="A Call to Arms" Load="Merge">
+    </node>
+
+    <node ID="Start" Load="Merge">
+      <choice IfHaveActiveQuest="Retrieve a Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" UseID="CRYPTOGEOLOGY_SparePartChoice"/>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_SparePart">
+      <text>
+        Prozeman. Prozeman! How is he doing? Still seeking cryptites?
+
+        Here is the part =player.formalAddressTerm=.
+      </text>
+      <choice ID="CRYPTOGEOLOGY_ProzemanChoice" GotoID="CRYPTOGEOLOGY_Prozeman">What do you think of Prozeman?</choice>
+      <choice ID="CRYPTOGEOLOGY_ExcavatorChoice" GotoID="CRYPTOGEOLOGY_Excavator">What do you think of the excavator?</choice>
+      <choice ID="CRYPTOGEOLOGY_EndChoice" GotoID="End">
+        <text>Live and drink, tinker.</text>
+      </choice>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Prozeman">
+      <text>
+        He has a joyful devotion to his work and its wonder. An invaluable trait in his chosen field.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ExcavatorChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Excavator">
+      <text>
+        It is an invention in process, an aglomeration of several minds' prints preserved in souldering technique.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ProzemanChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+  </conversation>
+
+
+  <conversation ID="YlaHaj" Load="Merge">
+    <node ID="Start" Load="Merge">
+      <choice IfHaveActiveQuest="Retrieve Another Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+        <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
+        <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
+      </choice>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_SparePart">
+      <text>
+        Ah. Again.
+
+        Let it not be said the Daughters of Exile refuse service to those who mishandle their own trinkets. Here is the part.
+      </text>
+      <choice ID="CRYPTOGEOLOGY_ProzemanChoice" GotoID="CRYPTOGEOLOGY_Prozeman">What do you think of Prozeman?</choice>
+      <choice ID="CRYPTOGEOLOGY_ExcavatorChoice" GotoID="CRYPTOGEOLOGY_Excavator">What do you think of the excavator?</choice>
+      <choice ID="CRYPTOGEOLOGY_EndChoice" GotoID="End">
+        <text>Live and drink, tinker.</text>
+      </choice>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Prozeman">
+      <text>
+        He is lucky he finds so many gemstones during his surveys.
+
+        Or perhaps luck has as little to do with it as science does.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ExcavatorChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Excavator">
+      <text>
+        It is a sickly thing, pushed through hardship till it breaks.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ProzemanChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+  </conversation>
+
+
+  <conversation ID="Bep" Load="Merge">
+    <node ID="Start" Load="Merge">
+      <choice IfHaveActiveQuest="Retrieve Yet Another Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+        <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
+        <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
+      </choice>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_SparePart">
+      <text>
+        yes! bep make excavatrrr bit for prozeman. here!
+      </text>
+      <choice ID="CRYPTOGEOLOGY_ProzemanChoice" GotoID="CRYPTOGEOLOGY_Prozeman">What do you think of Prozeman?</choice>
+      <choice ID="CRYPTOGEOLOGY_ExcavatorChoice" GotoID="CRYPTOGEOLOGY_Excavator">What do you think of the excavator?</choice>
+      <choice ID="CRYPTOGEOLOGY_EndChoice" GotoID="End">
+        <text>Live and drink, tinker.</text>
+      </choice>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Prozeman">
+      <text>
+        has rocks and rock stories. good stories.
+
+        maybe dig up story rocks? or not, stories good.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ExcavatorChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+
+    <node ID="CRYPTOGEOLOGY_Excavator">
+      <text>
+        bep make excavatrr bit. make blades taste rocks age.
+      </text>
+      <choice UseID="CRYPTOGEOLOGY_ProzemanChoice"/>
+      <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
+    </node>
+  </conversation>
+
+  <conversation ID="CRYPTOGEOLOGY_Neurolith">
+    <start>
+      <text>
+        &amp;w*Your vision fills with the impression of what once was. The vastness of its frame strains against the limits of your conception to spill out to impossible lengths. A full vista of worm-flesh winds outward towards the mind’s horizon, knoll after plated knoll.*&amp;y
+
+        Shed egg-thoughts and meet wakeful earth small-squirmer. Hunger-reigns quick to bite you. But share thoughts. Eat my know-paths.
+      </text>
+      <choice Target="Who">Who are you?</choice>
+      <choice ID="ShareChoice" GotoID="SharingLesson">Share your thoughts then.</choice>
+    </start>
+
+    <node ID="Who">
+      <text>
+        Canyon-Carver. Earth-Tiller. Traitorous-Deceitful-Ruler-Things-Swallower. Nest-Circler. Now, great joyously made, Egg-Bearer of You and Thousands More.
+      </text>
+      <choice Target="NotChild">But I am not your child.</choice>
+      <choice UseID="ShareChoice"/>
+    </node>
+
+    <node ID="NotChild">
+      <text>
+        Tangle-minded squirmer. Egg-thoughts need excreting. Calm now and share.
+      </text>
+      <choice Target="SharingLesson">No, I really am not your child.</choice>
+      <choice UseID="ShareChoice"/>
+    </node>
+
+    <node ID="SharingLesson">
+      <text>
+        Small-squirmer, coils circle all earth and stone and soil and clay to stir-sieve. Other circles round earth. Crawls with life-things. Brood-kin carve circles to stir-sieve. Circles within circles. Richness seeks well-circled soil. Carve betwixt the life-thing growths or circle dust and self-waste.
+      </text>
+      <choice Target="CalmLesson">...</choice>
+      <choice Target="CalmLesson">Are you ignoring me?</choice>
+    </node>
+
+    <node ID="CalmLesson">
+      <text>
+        Small-squirmer, life-things smaller still. Grains of earth-veins. Coils and gullet and rage stir-under all. But rage-lived like above-heat. Calm, small-squirmer. Rock-lived, you are as world sheet. Risk not heat-rage.
+      </text>
+      <choice Target="WonderLesson">...</choice>
+      <choice Target="WonderLesson">Are you ignoring me?</choice>
+    </node>
+
+    <node ID="WonderLesson">
+      <text>
+        Small-squirmer, fresh-hunger sated by time. Crustal-rupture grow cold. Hunger-reigns digest to freedom. Wonder-whys enter head. Why eat? Why carve? Why self? Coil tight wonder. Never shed. Follow answers. Become joy split. Become dream filled.
+      </text>
+      <choice Target="DistrustLesson">...</choice>
+      <choice Target="DistrustLesson">What is happening?</choice>
+    </node>
+
+    <node ID="DistrustLesson">
+      <text>
+        Small-squirmer, trust not ruler-things. Flesh-metal ruler-things helped become Egg-Bearer. But many eggs make them fear-reigned. They twist, poison dreams and eggs. Ruler-things fear-lived, deceit-plated. Trust not. Make caution when devouring; they poison.
+      </text>
+      <choice Target="Joy">Wise know-paths Egg-Bearer of Me and Thousands More</choice>
+      <choice Target="RockLived">...</choice>
+      <choice Target="Missing">Who’s thoughts have been preserved here?.</choice>
+    </node>
+
+    <node ID="Joy" AllowEscape="false">
+      <text>
+        Joy-split! Stir-sieve small-squirmer. Self quiet now. Rock-sleep long beckoning.
+      </text>
+      <choice CompleteQuestStep="The Dig~Attend the Dig" ID="NestCirclerChoice" GotoID="RockSleep">Sleep peacefully Nest-Circler.</choice>
+      <choice CompleteQuestStep="The Dig~Attend the Dig" ID="LongerChoice" GotoID="RockSleep">Longer than you know. Find what peace you can wayward fragment.</choice>
+      <choice CompleteQuestStep="The Dig~Attend the Dig" ID="Recording" GotoID="RockSleep">What do my words matter to a recording?</choice>
+      <choice CompleteQuestStep="The Dig~Attend the Dig" ID="WaitChoice" GotoID="RockSleep">Wait, what will happen to you?</choice>
+      <choice CompleteQuestStep="The Dig~Attend the Dig" ID="RockSleepChoice" GotoID="RockSleep">...</choice>
+    </node>
+
+    <node ID="RockLived" AllowEscape="false">
+      <text>
+        Rock-lived this one. Stir-sieve small-squirmer. Self quiet now. Rock-sleep long beckoning.
+      </text>
+      <choice UseID="NestCirclerChoice"/>
+      <choice UseID="LongerChoice"/>
+      <choice UseID="Recording"/>
+      <choice UseID="WaitChoice"/>
+      <choice UseID="RockSleepChoice"/>
+    </node>
+
+    <node ID="Missing" AllowEscape="false">
+      <text>
+        Know-paths missing. End in stumps. Where… Rock-sleep long beckoning.
+      </text>
+      <choice UseID="NestCirclerChoice"/>
+      <choice UseID="LongerChoice"/>
+      <choice UseID="Recording"/>
+      <choice UseID="WaitChoice"/>
+      <choice UseID="RockSleepChoice"/>
+    </node>
+
+    <node ID="RockSleep" AllowEscape="false">
+      <text>
+        &amp;w*Spiderweb fissures crawl down the Neurolith. The pressure of the psychic forces pumping through the petrified brain-matter cause flakes of stone to loose and fall away.*&amp;y
+
+        Rock-sleep long beckoning. Rock-sleep beckoning. Rock becoming. Rock. Rock. Rrr. …
+
+        &amp;w*The last telepathic transmission of the Neurolith reverberates about your brain-space for a few moments longer, and then is silent. Your vision clears, the worm scape decomposing in the heat of waking. You are left with a mound of fossil chips and pulverized sandstone begining to take to the wind.*&amp;y
+      </text>
+      <choice Target="End">
+        <text>...</text>
+      </choice>
+    </node>
+
+  </conversation>
+</conversations>

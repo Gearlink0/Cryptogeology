@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+	<object Name="CRYPTOGEOLOGY_TerrainDigSite" Inherits="Terrain">
+	    <part Name="Render" DisplayName="salt dunes" RenderString="247" ColorString="&amp;Y^k" Tile="Terrain/sw_desert.bmp" />
+	    <part Name="TerrainTravel" Segments="1250" TravelClass="Survival_SaltDesertSurvival" />
+	    <part Name="AnimatedMaterialSaltDunes" />
+	    <part Name="Description" Short="The ivory sea's dunes are like waves frozen in place. There are cracks in the salt from where the earth, blistered by the jeweled sun, contracted and broke. The horizon melts the sky together with the vast plain of Moghra'yi, the Great Salt Desert." />
+	    <tag Name="IndefiniteArticle" Value="the" />
+    	<tag Name="DefiniteArticle" Value="the" />
+			<tag Name="Terrain" Value="Saltdunes" />
+	    <part Name="UnityPrefabImposter" PrefabID="Prefabs/Particles/DesertWinds" />
+	 </object>
+</objects>

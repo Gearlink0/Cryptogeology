@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+  <object Name="CRYPTOGEOLOGY_Cryptogeologist" Inherits="NPC">
+    <part Name="CRYPTOGEOLOGY_Cryptogeologist"/>
+    <part Name="Render" DisplayName="Prozeman Schorl Hagad" Tile="creatures/Cryptogeologist.png" ColorString="&amp;Y" TileColor="&amp;r" DetailColor="w" RenderString="f" />
+    <part Name="Brain" Wanders="false" Factions="Pariahs-100" />
+    <part Name="Description" Short="A nova of moist papillae explodes from a black velvet snout. They huddle beneath a floppy hat, tasting the saline air and quivering with curiosity." />
+    <part Name="Interesting" />
+    <part Name="AISelfPreservation" Threshold="40" />
+    <part Name="ConversationScript" ConversationID="CRYPTOGEOLOGY_Cryptogeologist" />
+    <part Name="GameUnique" DeathState="CRYPTOGEOLOGY_CryptogeologistKilled" />
+    <stat Name="Intelligence" Value="28" />
+    <stat Name="Willpower" Value="18" />
+    <stat Name="Ego" Value="22" />
+    <stat Name="Level" Value="25" />
+    <skill Name="CookingAndGathering_Harvestry" />
+    <skill Name="CookingAndGathering_Spicer" />
+    <skill Name="Customs_TrashDivining" />
+    <skill Name="Endurance" />
+    <skill Name="Endurance_Weathered" />
+    <skill Name="Pistol" />
+    <property Name="WontSell" Value="Laser Pistol" />
+    <tag Name="InventoryPopulationTable" Value="CRYPTOGEOLOGY_CryptogeologistInventory" />
+    <mutation Name="Clairvoyance" Level="1" />
+    <mutation Name="NightVision" Level="10" />
+    <mutation Name="BurrowingClaws" Level="10" CreateObject="false" />
+    <tag Name="NoHateFactions" Value="Mechanimists,Pariahs,Wardens" />
+    <tag Name="Gender" Value="male" />
+    <tag Name="NoSleep" />
+    <xtagGrammar Proper="true" />
+    <tag Name="ExcludeFromDynamicEncounters" Value="*noinherit" />
+  </object>
+
+  <object Name="CryptitesACatalogueOfStrangeAndAstoundingRocks" Inherits="Book">
+    <part Name="Render" DisplayName="{{W|Cryptites: A Catalogue Of Strange And Astounding Rocks}}" ColorString="&amp;m" RenderString="=" RenderLayer="5" Tile="Items/sw_book_3.bmp" TileColor="&amp;m" DetailColor="R" />
+    <part Name="Book" ID="CryptitesACatalogueOfStrangeAndAstoundingRocks" />
+    <part Name="Commerce" Value="20" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_ExcavatorPart" Inherits="Item">
+    <part Name="Render" DisplayName="{{Y|excavator part}}" Tile="items/ExcavatorPart.png" ColorString="&amp;y" DetailColor="Y" RenderString="004" RenderLayer="5" />
+    <part Name="Physics" Category="Quest Items" />
+    <part Name="Examiner" Complexity="1" Understanding="1" />
+    <part Name="Description" Short="A handful of fresh excavator guts ready to be installed. Its purpose is unclear." />
+    <tag Name="QuestItem" />
+    <tag Name="ExcludeFromDynamicEncounters" />
+    <tag Name="NoSparkingQuest" />
+		<stag Name="Scrap" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_Neurolith" Inherits="BaseSedimentaryRock">
+    <part Name="Render" DisplayName="neurolith" ColorString="&amp;r^W" TileColor="&amp;r" DetailColor="W" />
+    <part Name="Examiner" Complexity="1" Understanding="1" />
+    <part Name="Description" Short="The geologic processes have, over the eons, deemed this chunk of primordial brain matter fit for mineral preservation." />
+    <tag Name="Interesting" />
+    <part Name="ConversationScript" ConversationID="CRYPTOGEOLOGY_Neurolith"/>
+    <part Name="CRYPTOGEOLOGY_Neurolith"/>
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_FossilLesson" Inherits="BaseBracelet">
+    <part Name="Render" Tile="items/FossilMemory.png" />
+    <part Name="Commerce" Value="500" />
+    <part Name="Physics" Weight="1" />
+		<tag Name="Mods" Value="None" />
+    <tag Name="ExcludeFromDynamicEncounters" Value="*noinherit" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_SharingLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
+    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Render" DisplayName="{{G|Lesson of Life-circling}}" ColorString="&amp;Y" DetailColor="G" />
+    <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
+    <part Name="RulesDescription" Text="Whenever you begin the water ritual with a new creature, and the next time you treat with a creature you are already bonded, this bracelet's power increases." />
+    <part Name="CRYPTOGEOLOGY_SharingLesson"/>
+    <property Name="Story" Value="CRYPTOGEOLOGY_SharingLesson" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_CalmLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
+    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Render" DisplayName="{{B|Lesson of Rock-life}}" ColorString="&amp;Y" DetailColor="B" />
+    <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
+    <part Name="CRYPTOGEOLOGY_CalmLesson"/>
+    <property Name="Story" Value="CRYPTOGEOLOGY_CalmLesson" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_WonderLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
+    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Render" DisplayName="{{M|Lesson of Wonder-whys}}" ColorString="&amp;Y" DetailColor="M" />
+    <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
+    <part Name="CRYPTOGEOLOGY_WonderLesson"/>
+    <property Name="Story" Value="CRYPTOGEOLOGY_WonderLesson" />
+  </object>
+
+  <object Name="CRYPTOGEOLOGY_DistrustLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
+    <part Name="Armor" AV="0" DV="2" MA="1" WornOn="Arm" />
+    <part Name="Render" DisplayName="{{R|Lesson of Ruler-thing Distrust}}" ColorString="&amp;Y" DetailColor="R" />
+    <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
+    <part Name="CRYPTOGEOLOGY_DistrustLesson"/>
+    <property Name="Story" Value="CRYPTOGEOLOGY_DistrustLesson" />
+  </object>
+
+</objects>

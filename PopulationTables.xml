@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<populations>
+    <population Name="CRYPTOGEOLOGY_CryptogeologistInventory">
+      <group Name="Items" Style="pickeach">
+        <object Blueprint="Laser Pistol" CellChance="100" CellFullChance="100" CellType="Chem Cell" />
+        <object Blueprint="Wide-brimmed Hat" />
+        <object Blueprint="Slate Frock" />
+        <object Blueprint="Walking Stick" />
+        <object Blueprint="CryptitesACatalogueOfStrangeAndAstoundingRocks" Number="3" />
+      </group>
+    </population>
+
+    <population Name="CRYPTOGEOLOGY_TheDigReward">
+  		<group Style="pickeach">
+  			<object Blueprint="CRYPTOGEOLOGY_SharingLesson" />
+  			<object Blueprint="CRYPTOGEOLOGY_CalmLesson" />
+  			<object Blueprint="CRYPTOGEOLOGY_WonderLesson" />
+  			<object Blueprint="CRYPTOGEOLOGY_DistrustLesson" />
+  		</group>
+  	</population>
+</populations>

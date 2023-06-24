@@ -70,7 +70,7 @@
       <text>
         Apologies, I am as eager to leave as you, but I need to pack up the excavator first.
 
-        But please, go ahead! I shall meet you at the site. Remember, 4 parasangs west of here!
+        But please, go ahead! I shall meet you at the site.
       </text>
       <choice Target="End">See you soon. Live and drink.</choice>
     </start>
@@ -374,7 +374,7 @@
     <node ID="TheDig">
       I am glad to hear so. Another first hand account of what we discover will be invaluable.
 
-      I will need to pack up the excavator first but please, go ahead and I shall meet you at the site! It is 4 parasangs due west of here.
+      Here are the coordinates of the dig. I will need to pack up the excavator first but please, go ahead and I shall meet you at the site!
       <choice Target="End">See you soon. Live and drink.</choice>
     </node>
 

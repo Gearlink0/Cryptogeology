@@ -1,101 +1,102 @@
 using System;
 using UnityEngine;
-// using XRL.World;
+using XRL.World.Effects;
 
 namespace XRL.World.Parts
 {
   [Serializable]
   public class CRYPTOGEOLOGY_DistrustLesson : IPart
   {
-    // When you desecrate a sultan shrine gain +2 DV, +2 MA, and +10 quickness for 2 hours." />
     public int Bonus = 20;
-    public int MaxDuration = 2;
+    public int MaxDuration = 20;
     public int Duration = 0;
+    public string ActivatedAbilityName = "Grow wary";
+    public string ActivatedAbilityCommandNamePrefix = "ActivateDistrustLesson";
+    [FieldSaveVersion(236)]
+    public string ActivatedAbilityClass;
+    [FieldSaveVersion(236)]
+    public string ActivatedAbilityIcon = "û";
+    [FieldSaveVersion(236)]
+    public Guid ActivatedAbilityID;
+
 
     public override bool WantEvent(int ID, int cascade)
     {
-      if( this.Duration > 0 && ID == EndTurnEvent.ID )
-        return true;
-      return base.WantEvent(ID, cascade) || ID == EquippedEvent.ID  || ID == UnequippedEvent.ID || ID == GetShortDescriptionEvent.ID;
+      return base.WantEvent(ID, cascade) || ID == CommandEvent.ID || ID == EquippedEvent.ID  || ID == UnequippedEvent.ID || ID == GetShortDescriptionEvent.ID;
     }
 
     public override bool FireEvent(Event E)
     {
+      // TODO: Find a good way to verify that the actor desecrating the shrine is
+      // the one equipping the lesson
       if (E.ID == "Desecrated")
       {
-        if (E.GetGameObjectParameter("Object") != null && E.GetGameObjectParameter("Object").HasPart("SultanShrine") )
+        if (E.GetGameObjectParameter("Object") != null && E.GetGameObjectParameter("Object").HasPart("SultanShrine"))
         {
-          this.Duration = this.MaxDuration * Calendar.turnsPerHour;
-          GameObject actor = this.ParentObject.Equipped;
-          this.UpdateStatShifts(actor);
-          if( actor.IsPlayer() ){
-            XRL.Messages.MessageQueue.AddPlayerMessage("The lesson whispers warriness, and your senses sharpen");
-          }
+          if (this.ParentObject.Equipped.IsPlayer())
+            XRL.Messages.MessageQueue.AddPlayerMessage("You remember the source of your distrust");
+          ActivatedAbilityEntry ActivatedAbilityEntry = GetMyActivatedAbilities(this.ParentObject.Equipped).GetAbility(this.ActivatedAbilityID);
+          if (ActivatedAbilityEntry.Cooldown > 0)
+            ActivatedAbilityEntry.Cooldown = 0;
         }
       }
       return base.FireEvent(E);
     }
 
-    public override bool HandleEvent(EndTurnEvent E)
+    public override bool HandleEvent(CommandEvent E)
     {
-      if (this.Duration > 0)
+      if (E.Command == this.GetActivatedAbilityCommandName() && E.Actor == this.ParentObject.Equipped)
       {
-        --this.Duration;
-        if (this.Duration == 0)
-        {
-          GameObject actor = this.ParentObject.Equipped;
-          this.UpdateStatShifts(actor);
-          if( actor.IsPlayer() ){
-            XRL.Messages.MessageQueue.AddPlayerMessage("Your heightened warriness subsides");
-          }
-        }
+        XRL.Messages.MessageQueue.AddPlayerMessage("The lesson whispers warriness");
+        E.Actor.ApplyEffect((Effect) new CRYPTOGEOLOGY_DistrustEffect(MaxDuration, Bonus, this.ParentObject));
+        E.Actor.CooldownActivatedAbility(this.ActivatedAbilityID, 1200);
       }
       return base.HandleEvent(E);
     }
 
     public override bool HandleEvent(EquippedEvent E)
     {
-      GameObject actor = E.Actor;
-      actor.RegisterPartEvent((IPart) this, "Desecrated");
-      this.UpdateStatShifts(actor);
+      E.Actor.RegisterPartEvent((IPart) this, "Desecrated");
+      E.Actor.RegisterPartEvent((IPart) this, this.GetActivatedAbilityCommandName());
+      this.SetUpActivatedAbility(E.Actor);
       return base.HandleEvent(E);
     }
 
     public override bool HandleEvent(UnequippedEvent E)
     {
-      GameObject actor = E.Actor;
-      actor.UnregisterPartEvent((IPart) this, "Desecrated");
-      this.StatShifter.RemoveStatShifts();
+      E.Actor.UnregisterPartEvent((IPart) this, "Desecrated");
+      E.Actor.UnregisterPartEvent((IPart) this, this.GetActivatedAbilityCommandName());
+      E.Actor.RemoveActivatedAbility(ref this.ActivatedAbilityID);
       return base.HandleEvent(E);
-    }
-
-    public bool UpdateStatShifts(GameObject who = null)
-    {
-      if (who == null)
-      {
-        who = this.ParentObject.Equipped;
-        if (who == null)
-        {
-          this.StatShifter.RemoveStatShifts();
-          return false;
-        }
-      }
-      if (!this.ParentObject.IsWorn())
-      {
-        this.StatShifter.RemoveStatShifts();
-        return false;
-      }
-      int bonus = 0;
-      if (this.Duration > 0)
-        bonus = this.Bonus;
-      this.StatShifter.SetStatShift(who, "Speed", bonus);
-      return true;
     }
 
     public override bool HandleEvent(GetShortDescriptionEvent E)
     {
-      E.Postfix.AppendRules("When you desecrate a sultan shrine, +" + this.Bonus.ToString() + " Quickness for " + this.Duration.ToString() + " hours");
+      E.Postfix.AppendRules("You can grow wary, gaining +" + this.Bonus.ToString() + " Quickness for " + this.Duration.ToString() + " rounds. Desecrating a sulten shrine refreshes this ability.");
       return base.HandleEvent(E);
     }
+
+    public void SetUpActivatedAbility(GameObject Who = null)
+    {
+      if (Who == null)
+        Who = this.ParentObject.Equipped;
+      if (Who == null)
+        return;
+      if (this.ActivatedAbilityID == Guid.Empty)
+        this.ActivatedAbilityID = Who.AddActivatedAbility(this.ActivatedAbilityName, this.GetActivatedAbilityCommandName(), this.ActivatedAbilityClass ?? (Who == this.ParentObject ? "Maneuvers" : "Items"), Icon: this.ActivatedAbilityIcon);
+      else
+        this.SyncActivatedAbilityName(Who);
+    }
+
+    public void SyncActivatedAbilityName(GameObject Who = null)
+    {
+      if (this.ActivatedAbilityID == Guid.Empty)
+        return;
+      if (Who == null)
+        Who = this.ParentObject.Equipped;
+      Who.SetActivatedAbilityDisplayName(this.ActivatedAbilityID, this.ActivatedAbilityName);
+    }
+
+    public string GetActivatedAbilityCommandName() => this.ActivatedAbilityCommandNamePrefix + this.ParentObject.id;
   }
 }

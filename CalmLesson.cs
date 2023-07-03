@@ -19,28 +19,42 @@ namespace XRL.World.Parts
 
     public CRYPTOGEOLOGY_CalmLesson()
     {
-      WorksOnWearer = true;
+      this.IsBreakageSensitive = true;
+      this.WorksOnWearer = true;
     }
 
-		public override bool WantEvent(int ID, int cascade) => base.WantEvent(ID, cascade) || ID == GetCooldownEvent.ID || ID == EquippedEvent.ID  || ID == UnequippedEvent.ID || ID == GetShortDescriptionEvent.ID;
+		public override bool WantEvent(int ID, int cascade) {
+      return base.WantEvent(ID, cascade)
+      || ID == GetCooldownEvent.ID
+      || ID == EquippedEvent.ID
+      || ID == UnequippedEvent.ID
+      || ID == GetShortDescriptionEvent.ID;
+    }
 
     public override bool FireEvent(Event E)
     {
-      if ((E.ID == "DefenderHit" || E.ID == "DefenderMissileWeaponHit") && E.GetIntParameter("Penetrations") <= 0 && Stat.Random(1, 100) <= this.FearOnPenetrationChance)
+      if (
+        this.IsReady()
+        && (E.ID == "DefenderHit" || E.ID == "DefenderMissileWeaponHit")
+        && E.GetIntParameter("Penetrations") <= 0
+        && Stat.Random(1, 100) <= this.FearOnPenetrationChance
+      )
       {
-        XRL.Messages.MessageQueue.AddPlayerMessage("You do not flinch at the attack");
+        XRL.Messages.MessageQueue.AddPlayerMessage("You do not flinch at the attack.");
         GameObject Attacker = E.GetGameObjectParameter("Attacker");
-        // TODO: Terrible hack, find a better way
-        Persuasion_MenacingStare test = new Persuasion_MenacingStare();
+        GameObject Subject = this.GetActivePartFirstSubject();
+        // Use an instance of MenacingStare to access it's default RatingBase
+        // and RatingOffset
+        Persuasion_MenacingStare MenacingStare = new Persuasion_MenacingStare();
         this.PerformMentalAttack(
           new Mental.Attack(Terrified.OfAttacker),
-          this.ParentObject.Equipped,
+          Subject,
           Attacker,
           Command: "Terrify MenacingStare",
-          Dice: test.RatingBase,
+          Dice: MenacingStare.RatingBase,
           Type: 8388612,
           Magnitude: "6d4".RollCached(),
-          AttackModifier: (this.ParentObject.Equipped.StatMod("Ego") + test.RatingOffset)
+          AttackModifier: (Subject.StatMod("Ego") + MenacingStare.RatingOffset)
         );
       }
       return base.FireEvent(E);
@@ -48,7 +62,10 @@ namespace XRL.World.Parts
 
 		public override bool HandleEvent(GetCooldownEvent E)
     {
-      if (this.IncludeAbilities.CachedCommaExpansion().Contains(E.Ability.DisplayName) && this.IsObjectActivePartSubject(E.Actor))
+      if (
+        this.IncludeAbilities.CachedCommaExpansion().Contains(E.Ability.DisplayName)
+        && this.IsObjectActivePartSubject(E.Actor)
+      )
       {
         if (!string.IsNullOrEmpty(this.PercentageReduction))
 				{
@@ -74,24 +91,16 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(GetShortDescriptionEvent E)
     {
-      if ((this.WorksOnEquipper || this.WorksOnWearer || this.WorksOnHolder || this.WorksOnCarrier || this.WorksOnImplantee) && (!string.IsNullOrEmpty(this.PercentageReduction)))
-      {
-        StringBuilder postfix = E.Postfix;
-        postfix.Append("\n{{rules|");
-        postfix.Append("Provides ").Append(PercentageReduction).Append("% reduction in the ");
-
-        postfix.Append(" in the ");
-        List<string> words = this.IncludeAbilities.CachedCommaExpansion();
-        postfix.Append(words.Count == 1 ? "cooldown of the ability " : "cooldowns of the abilities ");
-        postfix.Append(ColorUtility.StripFormatting(words.Count == 1 ? words[0] : Grammar.MakeAndList(words)));
-        postfix.Append('.');
-
-        postfix.Append("\nWhenever an attack hits you but does not penetrate, there is a ");
-        postfix.Append(this.FearOnPenetrationChance.ToString());
-        postfix.Append("% chance you stare down the attacker.");
-        this.AddStatusSummary(postfix);
-        postfix.Append("}}");
-      }
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.Append("Provides ").Append(PercentageReduction).Append("% reduction in the ");
+      List<string> words = this.IncludeAbilities.CachedCommaExpansion();
+      stringBuilder.Append(words.Count == 1 ? "cooldown of the ability " : "cooldowns of the abilities ");
+      stringBuilder.Append(ColorUtility.StripFormatting(words.Count == 1 ? words[0] : Grammar.MakeAndList(words)));
+      stringBuilder.Append('.');
+      stringBuilder.Append("\nWhenever an attack hits you but does not penetrate, there is a ");
+      stringBuilder.Append(this.FearOnPenetrationChance.ToString());
+      stringBuilder.Append("% chance you stare down the attacker.");
+      E.Postfix.AppendRules( stringBuilder.ToString() );
       return base.HandleEvent(E);
     }
   }

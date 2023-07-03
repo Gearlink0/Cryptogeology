@@ -1,11 +1,12 @@
 using System;
+using System.Text;
 using UnityEngine;
 using XRL.World.Effects;
 
 namespace XRL.World.Parts
 {
   [Serializable]
-  public class CRYPTOGEOLOGY_DistrustLesson : IPart
+  public class CRYPTOGEOLOGY_DistrustLesson : IActivePart
   {
     public int Bonus = 20;
     public int MaxDuration = 20;
@@ -19,23 +20,31 @@ namespace XRL.World.Parts
     [FieldSaveVersion(236)]
     public Guid ActivatedAbilityID;
 
+    public CRYPTOGEOLOGY_DistrustLesson()
+    {
+      this.IsBreakageSensitive = true;
+      this.WorksOnWearer = true;
+    }
 
     public override bool WantEvent(int ID, int cascade)
     {
-      return base.WantEvent(ID, cascade) || ID == CommandEvent.ID || ID == EquippedEvent.ID  || ID == UnequippedEvent.ID || ID == GetShortDescriptionEvent.ID;
+      return base.WantEvent(ID, cascade)
+      || ID == CommandEvent.ID
+      || ID == EquippedEvent.ID
+      || ID == UnequippedEvent.ID
+      || ID == GetShortDescriptionEvent.ID;
     }
 
     public override bool FireEvent(Event E)
     {
-      // TODO: Find a good way to verify that the actor desecrating the shrine is
-      // the one equipping the lesson
       if (E.ID == "Desecrated")
       {
         if (E.GetGameObjectParameter("Object") != null && E.GetGameObjectParameter("Object").HasPart("SultanShrine"))
         {
-          if (this.ParentObject.Equipped.IsPlayer())
-            XRL.Messages.MessageQueue.AddPlayerMessage("You remember the source of your distrust");
-          ActivatedAbilityEntry ActivatedAbilityEntry = GetMyActivatedAbilities(this.ParentObject.Equipped).GetAbility(this.ActivatedAbilityID);
+          GameObject Subject = this.GetActivePartFirstSubject();
+          if (Subject.IsPlayer())
+            XRL.Messages.MessageQueue.AddPlayerMessage("You remember the source of your distrust.");
+          ActivatedAbilityEntry ActivatedAbilityEntry = GetMyActivatedAbilities(Subject).GetAbility(this.ActivatedAbilityID);
           if (ActivatedAbilityEntry.Cooldown > 0)
             ActivatedAbilityEntry.Cooldown = 0;
         }
@@ -45,9 +54,9 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(CommandEvent E)
     {
-      if (E.Command == this.GetActivatedAbilityCommandName() && E.Actor == this.ParentObject.Equipped)
+      if (E.Command == this.GetActivatedAbilityCommandName() && E.Actor == this.GetActivePartFirstSubject())
       {
-        XRL.Messages.MessageQueue.AddPlayerMessage("The lesson whispers warriness");
+        XRL.Messages.MessageQueue.AddPlayerMessage("The lesson whispers warriness.");
         E.Actor.ApplyEffect((Effect) new CRYPTOGEOLOGY_DistrustEffect(MaxDuration, Bonus, this.ParentObject));
         E.Actor.CooldownActivatedAbility(this.ActivatedAbilityID, 1200);
       }
@@ -72,18 +81,27 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(GetShortDescriptionEvent E)
     {
-      E.Postfix.AppendRules("You can grow wary, gaining +" + this.Bonus.ToString() + " Quickness for " + this.Duration.ToString() + " rounds. Desecrating a sulten shrine refreshes this ability.");
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.Append("You can grow wary, gaining +").Append( this.Bonus.ToString() );
+      stringBuilder.Append(" Quickness for ").Append( this.MaxDuration.ToString() );
+      stringBuilder.Append(" rounds. Desecrating a sultan shrine refreshes this ability.");
+      E.Postfix.AppendRules( stringBuilder.ToString() );
       return base.HandleEvent(E);
     }
 
     public void SetUpActivatedAbility(GameObject Who = null)
     {
       if (Who == null)
-        Who = this.ParentObject.Equipped;
+        Who = this.GetActivePartFirstSubject();
       if (Who == null)
         return;
       if (this.ActivatedAbilityID == Guid.Empty)
-        this.ActivatedAbilityID = Who.AddActivatedAbility(this.ActivatedAbilityName, this.GetActivatedAbilityCommandName(), this.ActivatedAbilityClass ?? (Who == this.ParentObject ? "Maneuvers" : "Items"), Icon: this.ActivatedAbilityIcon);
+        this.ActivatedAbilityID = Who.AddActivatedAbility(
+          this.ActivatedAbilityName,
+          this.GetActivatedAbilityCommandName(),
+          this.ActivatedAbilityClass ?? (Who == this.ParentObject ? "Maneuvers" : "Items"),
+          Icon: this.ActivatedAbilityIcon
+        );
       else
         this.SyncActivatedAbilityName(Who);
     }
@@ -93,7 +111,9 @@ namespace XRL.World.Parts
       if (this.ActivatedAbilityID == Guid.Empty)
         return;
       if (Who == null)
-        Who = this.ParentObject.Equipped;
+        Who = this.GetActivePartFirstSubject();
+      if (Who == null)
+        return;
       Who.SetActivatedAbilityDisplayName(this.ActivatedAbilityID, this.ActivatedAbilityName);
     }
 

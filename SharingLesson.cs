@@ -4,10 +4,16 @@ using UnityEngine;
 namespace XRL.World.Parts
 {
   [Serializable]
-  public class CRYPTOGEOLOGY_SharingLesson : IPart
+  public class CRYPTOGEOLOGY_SharingLesson : IActivePart
   {
     public int HPPerRitual = 1;
     public int Bonus = 0;
+
+    public CRYPTOGEOLOGY_SharingLesson()
+    {
+      this.IsBreakageSensitive = true;
+      this.WorksOnWearer = true;
+    }
 
     public override bool WantEvent(int ID, int cascade)
     {
@@ -21,12 +27,12 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(WaterRitualStartEvent E)
     {
-      if (E.Actor.IsPlayer())
+      if (IsObjectActivePartSubject( E.Actor ) && E.Actor.IsPlayer())
       {
         int OldBonus = this.Bonus;
         this.UpdateStatShifts(E.Actor);
         if( this.Bonus > OldBonus )
-          XRL.Messages.MessageQueue.AddPlayerMessage("The lesson resonates as you share a new circle");
+          XRL.Messages.MessageQueue.AddPlayerMessage("The lesson resonates as you share a new circle.");
       }
       return base.HandleEvent(E);
     }
@@ -38,7 +44,7 @@ namespace XRL.World.Parts
         int OldBonus = this.Bonus;
         this.UpdateStatShifts(E.Actor);
         if( this.Bonus > OldBonus )
-          XRL.Messages.MessageQueue.AddPlayerMessage("The lesson resonates as you share a new circle");
+          XRL.Messages.MessageQueue.AddPlayerMessage("The lesson resonates as you share a new circle.");
       }
       return base.HandleEvent(E);
     }
@@ -59,16 +65,17 @@ namespace XRL.World.Parts
     {
       if (who == null)
       {
-        who = this.ParentObject.Equipped;
+        who = this.GetActivePartFirstSubject();
         if (who == null)
           return false;
       }
-      if (!this.ParentObject.IsWorn())
+      if (!this.IsReady())
       {
         this.StatShifter.RemoveStatShifts();
         return false;
       }
-      this.Bonus = this.CalculateBonus();
+      if (who.IsPlayer())
+        this.Bonus = this.CalculateBonus();
       this.StatShifter.SetStatShift(who, "Hitpoints", this.Bonus, true);
       return true;
     }

@@ -1,6 +1,7 @@
 using Qud.API;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using XRL.Language;
 using XRL.Rules;
 using XRL.UI;
@@ -8,11 +9,17 @@ using XRL.UI;
 namespace XRL.World.Parts
 {
   [Serializable]
-  public class CRYPTOGEOLOGY_WonderLesson : IPart
+  public class CRYPTOGEOLOGY_WonderLesson : IActivePart
   {
     public int Chance = 10;
     [NonSerialized]
     public Dictionary<string, bool> Visited = new Dictionary<string, bool>();
+
+    public CRYPTOGEOLOGY_WonderLesson()
+    {
+      this.IsBreakageSensitive = true;
+      this.WorksOnWearer = true;
+    }
 
     public override void LoadData(SerializationReader Reader)
     {
@@ -42,20 +49,27 @@ namespace XRL.World.Parts
     {
       if (E.ID == "EnteredCell")
       {
-        if (this.ParentObject.pPhysics.Equipped != null && this.ParentObject.pPhysics.Equipped.IsPlayer())
+        GameObject Subject = this.GetActivePartFirstSubject();
+        if (Subject != null && Subject.IsPlayer())
         {
-          string zoneId = IComponent<GameObject>.ThePlayer.pPhysics.CurrentCell.ParentZone.ZoneID;
-          Stomach stomach = IComponent<GameObject>.ThePlayer.GetPart("Stomach") as Stomach;
-          if (!IComponent<GameObject>.ThePlayer.pPhysics.CurrentCell.ParentZone.IsWorldMap() && stomach.HungerLevel == 0)
+          Zone CurrentZone = Subject.pPhysics.CurrentCell.ParentZone;
+          Stomach Stomach = (Stomach) Subject.GetPart("Stomach");
+          if (!CurrentZone.IsWorldMap() && Stomach.HungerLevel == 0)
           {
-            if (this.Visited.ContainsKey(zoneId))
+            if (this.Visited.ContainsKey(CurrentZone.ZoneID))
               return true;
-            this.Visited.Add(zoneId, true);
+            this.Visited.Add(CurrentZone.ZoneID, true);
             if (Stat.Random(0, 100) <= this.Chance)
             {
-              IBaseJournalEntry randomUnrevealedNote = JournalAPI.GetRandomUnrevealedNote();
-              Popup.Show("Your head throbs with the wonder of ancient, squirming, things and you piece together a truth:\n\n" + (randomUnrevealedNote as JournalMapNote == null ? randomUnrevealedNote.text : "The location of " + Grammar.InitLowerIfArticle(randomUnrevealedNote.text)));
-              randomUnrevealedNote.Reveal();
+              IBaseJournalEntry RandomUnrevealedNote = JournalAPI.GetRandomUnrevealedNote();
+              StringBuilder stringBuilder = new StringBuilder();
+              stringBuilder.Append("Your head throbs with the wonder of ancient, squirming, things and you piece together a truth:\n\n");
+              if( RandomUnrevealedNote as JournalMapNote == null )
+                stringBuilder.Append( RandomUnrevealedNote.text );
+              else
+                stringBuilder.Append( "The location of " ).Append( Grammar.InitLowerIfArticle(RandomUnrevealedNote.text) );
+              Popup.Show(stringBuilder.ToString());
+              RandomUnrevealedNote.Reveal();
             }
           }
         }

@@ -75,7 +75,7 @@
   </object>
 
   <object Name="CRYPTOGEOLOGY_CalmLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
-    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Armor" AV="0" DV="2" WornOn="Arm" />
     <part Name="Render" DisplayName="{{B|Lesson of Rock-life}}" ColorString="&amp;Y" DetailColor="B" />
     <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
     <part Name="CRYPTOGEOLOGY_CalmLesson"/>
@@ -83,7 +83,7 @@
   </object>
 
   <object Name="CRYPTOGEOLOGY_WonderLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
-    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Armor" AV="0" DV="2" MA="2" WornOn="Arm" />
     <part Name="Render" DisplayName="{{M|Lesson of Wonder-whys}}" ColorString="&amp;Y" DetailColor="M" />
     <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
     <part Name="CRYPTOGEOLOGY_WonderLesson"/>
@@ -91,7 +91,7 @@
   </object>
 
   <object Name="CRYPTOGEOLOGY_DistrustLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
-    <part Name="Armor" AV="0" DV="2" MA="1" WornOn="Arm" />
+    <part Name="Armor" AV="0" DV="2" WornOn="Arm" />
     <part Name="Render" DisplayName="{{R|Lesson of Ruler-thing Distrust}}" ColorString="&amp;Y" DetailColor="R" />
     <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
     <part Name="CRYPTOGEOLOGY_DistrustLesson"/>

@@ -11,13 +11,23 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(ZoneActivatedEvent E)
     {
-      if (The.Game.HasGameState("CRYPTOGEOLOGY_CryptogeologistMoved") && this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_StiltSpawner")!=null)
+      // If the cryptogeologist moved to the dig site, but this instance is in the
+      // stilt, delete this instance
+      if (
+        The.Game.HasGameState("CRYPTOGEOLOGY_CryptogeologistMoved")
+        && this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_StiltSpawner") != null
+      )
       {
         this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_ExactingExcavator")?.Destroy();
         this.ParentObject.Destroy();
       }
 
-      if (The.Game.HasFinishedQuest("The Dig") && this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_DigSiteSpawner")!=null)
+      // If the dig has been completed, but this instance is in the dig site,
+      // delete this instance
+      if (
+        The.Game.HasFinishedQuest("The Dig")
+        && this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_DigSiteSpawner") != null
+      )
       {
         this.ParentObject.CurrentCell.ParentZone.FindObject("CRYPTOGEOLOGY_ExactingExcavator")?.Destroy();
         this.ParentObject.Destroy();

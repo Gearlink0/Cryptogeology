@@ -11,16 +11,11 @@ namespace XRL.World.QuestManagers
 
     public override void OnQuestAdded()
 		{
-			XRL.Messages.MessageQueue.AddPlayerMessage("OnQuestAdded");
 			if (this.secretId != null)
       {
-				XRL.Messages.MessageQueue.AddPlayerMessage("secret id not null");
 	      JournalMapNote mapNote = JournalAPI.GetMapNote(this.secretId);
 	      if (mapNote != null && !mapNote.revealed)
-				{
-					XRL.Messages.MessageQueue.AddPlayerMessage("map note not null");
 	        mapNote.Reveal(false);
-				}
 			}
 		}
   }

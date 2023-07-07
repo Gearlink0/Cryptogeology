@@ -392,7 +392,13 @@
 
   <conversation ID="Q Girl" Load="Merge">
     <node ID="Start" IfNotFinishedQuest="More Than a Willing Spirit" Load="Merge">
-      <choice IfHaveActiveQuest="Retrieve a Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+      <choice
+        IfHaveActiveQuest="Retrieve a Spare Part for the Excavator"
+        IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart"
+        ID="CRYPTOGEOLOGY_SparePartChoice"
+        GotoID="CRYPTOGEOLOGY_SparePart"
+        CompleteQuestStep="Retrieve a Spare Part for the Excavator~Retrieve a Spare Part"
+      >
         <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
         <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
       </choice>
@@ -402,7 +408,11 @@
     </node>
 
     <node ID="Start" Load="Merge">
-      <choice IfHaveActiveQuest="Retrieve a Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" UseID="CRYPTOGEOLOGY_SparePartChoice"/>
+      <choice
+        IfHaveActiveQuest="Retrieve a Spare Part for the Excavator"
+        IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart"
+        UseID="CRYPTOGEOLOGY_SparePartChoice"
+      />
     </node>
 
     <node ID="CRYPTOGEOLOGY_SparePart">
@@ -438,7 +448,13 @@
 
   <conversation ID="YlaHaj" Load="Merge">
     <node ID="Start" Load="Merge">
-      <choice IfHaveActiveQuest="Retrieve Another Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+      <choice
+        IfHaveActiveQuest="Retrieve Another Spare Part for the Excavator"
+        IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart"
+        ID="CRYPTOGEOLOGY_SparePartChoice"
+        GotoID="CRYPTOGEOLOGY_SparePart"
+        CompleteQuestStep="Retrieve Another Spare Part for the Excavator~Retrieve a Spare Part"
+      >
         <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
         <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
       </choice>
@@ -479,7 +495,13 @@
 
   <conversation ID="Bep" Load="Merge">
     <node ID="Start" Load="Merge">
-      <choice IfHaveActiveQuest="Retrieve Yet Another Spare Part for the Excavator" IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart" ID="CRYPTOGEOLOGY_SparePartChoice" GotoID="CRYPTOGEOLOGY_SparePart">
+      <choice
+        IfHaveActiveQuest="Retrieve Yet Another Spare Part for the Excavator"
+        IfNotHaveBlueprint="CRYPTOGEOLOGY_ExcavatorPart"
+        ID="CRYPTOGEOLOGY_SparePartChoice"
+        GotoID="CRYPTOGEOLOGY_SparePart"
+        CompleteQuestStep="Retrieve Yet Another Spare Part for the Excavator~Retrieve a Spare Part"
+      >
         <text>Prozeman Schorl Hagad sent me. The excavator broke and he requests a spare of the part you made for it.</text>
         <part Name="ReceiveItem" Blueprints="CRYPTOGEOLOGY_ExcavatorPart" />
       </choice>

@@ -66,7 +66,7 @@
   </object>
 
   <object Name="CRYPTOGEOLOGY_SharingLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
-    <part Name="Armor" AV="0" DV="0" WornOn="Arm" />
+    <part Name="Armor" AV="0" DV="2" WornOn="Arm" />
     <part Name="Render" DisplayName="{{G|Lesson of Life-circling}}" ColorString="&amp;Y" DetailColor="G" />
     <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
     <part Name="RulesDescription" Text="This bracelet's power increases for each creature you perform the water ritual with." />
@@ -83,7 +83,7 @@
   </object>
 
   <object Name="CRYPTOGEOLOGY_WonderLesson" Inherits="CRYPTOGEOLOGY_FossilLesson">
-    <part Name="Armor" AV="0" DV="2" MA="2" WornOn="Arm" />
+    <part Name="Armor" AV="0" DV="2" MA="1" WornOn="Arm" />
     <part Name="Render" DisplayName="{{M|Lesson of Wonder-whys}}" ColorString="&amp;Y" DetailColor="M" />
     <part Name="Description" Short="A mineralized lesson from an ancient mother to an ancient brood." />
     <part Name="CRYPTOGEOLOGY_WonderLesson"/>

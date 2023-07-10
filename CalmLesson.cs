@@ -15,7 +15,7 @@ namespace XRL.World.Parts
   {
     public string PercentageReduction = "50";
 		public string IncludeAbilities = "Menacing Stare,Intimidate";
-    public int FearOnPenetrationChance = 2;
+    public int FearOnPenetrationChance = 10;
 
     public CRYPTOGEOLOGY_CalmLesson()
     {

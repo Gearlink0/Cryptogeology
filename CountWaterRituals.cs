@@ -18,7 +18,12 @@ namespace XRL.World.Parts
 
 		public override bool HandleEvent(AfterPlayerBodyChangeEvent E)
 	  {
-			if( E.OldBody != null && E.NewBody != null ){
+			if(
+        E.OldBody != null
+        && E.NewBody != null
+        && E.OldBody == this.ParentObject
+        && !E.NewBody.HasPart<CRYPTOGEOLOGY_CountWaterRituals>()
+      ){
 				E.OldBody.RemovePart(this);
 		    E.NewBody.AddPart(this);
 			}

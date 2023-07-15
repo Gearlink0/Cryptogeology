@@ -58,7 +58,7 @@
 
     <start IfFinishedQuest="Retrieve Yet Another Spare Part for the Excavator" IfNotHaveActiveQuest="The Dig" IfNotHaveState="CRYPTOGEOLOGY_CryptogeologistMoved">
       <text>
-        You return. As you can see, I still am in the process of packing the excavator.
+        You return. As you can see, I am still in the process of packing the excavator.
 
         Have you reconsidered? Join me for the discovery of a lifetime?
       </text>
@@ -87,7 +87,7 @@
 
     <start IfHaveActiveQuest="The Dig" IfNotFinishedQuestStep="The Dig~Attend the Dig" IfHaveState="CRYPTOGEOLOGY_CryptogeologistMoved">
       <text>
-        Oh, all the sweating over spare parts has made this moment all the sweeter. I can taste it =name=! The ethereal tremors on my papilae. Neurolith lurks below us!
+        Oh, all the sweating over spare parts has made this moment all the sweeter. I can taste it =name=! The ethereal tremors on my papillae. Neurolith lurks below us!
 
         Shall we?
       </text>
@@ -101,7 +101,7 @@
       <text>
         &amp;w*Prozeman sifts numbly through the remains of the neurolith.*&amp;y
 
-        It was here. I could have touched it, tasted it, traced the crystaline structures, weighed the carbon's age. It was here.
+        It was here. I could have touched it, tasted it, traced the crystalline  structures, weighed the carbon's age. It was here.
       </text>
       <choice GotoID="CalmWisdom">You didn't know. We didn't know.</choice>
       <choice GotoID="CalmWisdom">All is not lost. There are still bits of the fossil.</choice>
@@ -123,7 +123,7 @@
     <node ID="Ancient">
       Thank you, your account is invaluable, and largely fits with my own.
 
-      I am not so certain the mind within the fossil was alive. It seemed... stuck. Like a recording of thoughs instead of a living mind. Perhaps a consequence of the fossil's rigid mineral structure?
+      I am not so certain the mind within the fossil was alive. It seemed... stuck. Like a recording of thoughts instead of a living mind. Perhaps a consequence of the fossil's rigid mineral structure?
 
       It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
       <choice ID="RewardChoice" GotoID="Reward">Then I will leave you to your research.</choice>
@@ -132,7 +132,7 @@
     <node ID="LastWords">
       Thank you, your account is invaluable, and largely fits with my own.
 
-      I am not sure the words were heard were merely static, preserved in rock as an insect in amber. Whatever I spoke to sometimes responded, as though it could perceive me. But not always? Perhaps its senses were limited in some fashion?
+      I am not sure the words we heard were merely static, preserved in rock as an insect in amber. Whatever I spoke to sometimes responded, as though it could perceive me. But not always? Perhaps its senses were limited in some fashion?
 
       It will likely be some time before I publish our findings here. There is much to consider, and I cannot in good conscience seek out further Neuroliths if it risks their destruction.
       <choice UseID="RewardChoice"/>
@@ -161,7 +161,7 @@
 
       &amp;w*Prozeman delicately plucks one of the larger chunks of fossil from the rubble and offers it to you. The hum of a soft memory still clings to the pebble.*&amp;y
 
-      Here. Normally, I would balk at giving up such a sample. But you spoke to it, and received its wisdom as well. Passing this on feels, appropriate.
+      Here. Normally, I would balk at giving up such a sample. But you spoke to it and received its wisdom as well. Passing this on feels... appropriate.
       <choice GotoID="End">
         <text>A generous gift, thank you stone seeker. Live and drink</text>
         <part Name="ReceiveItem" Pick="true" Table="CRYPTOGEOLOGY_TheDigReward" Identify="All" />
@@ -192,7 +192,7 @@
 
     <node ID="Research">
       <text>
-        It goes well! Slowly, but well. I must be methodical and thorough with the samples we retreived.
+        It goes well! Slowly, but well. I must be methodical and thorough with the samples we retrieved.
       </text>
       <choice UseID="MoreWorkChoice"/>
       <choice Target="End">Live and drink.</choice>
@@ -244,7 +244,7 @@
     </node>
 
     <node ID="Rickety">
-      It is admitedly a delicate thing. Many tinkers have helped build and add to it over the years. Its patchwork design functions but is... well as you say: rickety. It's why I need a courier, actually.
+      It is admittedly a delicate thing. Many tinkers have helped build and add to it over the years. Its patchwork design functions but is... well as you say: rickety. It's why I need a courier, actually.
       <choice UseID="CryptogeologyChoice"/>
       <choice Target="Job">Why do you need a courier?.</choice>
       <choice GotoID="End">I am not interested in courier work. Live and drink.</choice>
@@ -283,7 +283,7 @@
     </node>
 
     <node ID="Tinker">
-      I have tried, but it is a tangled bird's nest of tinker work. In my experience, unframiliar makers, even skilled ones, tend to break as much as they fix.
+      I have tried, but it is a tangled bird's nest of tinker work. In my experience, unfamiliar makers, even skilled ones, tend to break as much as they fix.
       <choice UseID="WhereReplacement1Choice"/>
       <choice UseID="YourselfChoice"/>
       <choice Target="End">This job does not suit me. Live and drink.</choice>
@@ -366,13 +366,13 @@
 
       Oh it lives. IT LIVES! Joyous day. You have my endless thanks for all you have done =name=.
 
-      I must be off =player.formalAddressTerm=; the dig site calls and I cannot wait any longer. But, would you like to come with me? See this beauty put to work? With good fortune, be there at the discovery of an entirely new mineral?
+      I must be off =player.formalAddressTerm=; the dig site calls and I cannot wait any longer. But would you like to come with me? See this beauty put to work? With good fortune, be there at the discovery of an entirely new mineral?
       <choice ID="TheDigChoice" GotoID="TheDig" StartQuest="The Dig">Yes stone-seeker, I will join you.</choice>
       <choice Target="End">I have better things to be doing. Live and drink.</choice>
     </node>
 
     <node ID="TheDig">
-      I am glad to hear so. Another first hand account of what we discover will be invaluable.
+      I am glad to hear so. Another firsthand account of what we discover will be invaluable.
 
       Here are the coordinates of the dig. I will need to pack up the excavator first but please, go ahead and I shall meet you at the site!
       <choice Target="End">See you soon. Live and drink.</choice>
@@ -419,7 +419,7 @@
       <text>
         Prozeman. Prozeman! How is he doing? Still seeking cryptites?
 
-        Here is the part =player.formalAddressTerm=.
+        Here is the part, =player.formalAddressTerm=.
       </text>
       <choice ID="CRYPTOGEOLOGY_ProzemanChoice" GotoID="CRYPTOGEOLOGY_Prozeman">What do you think of Prozeman?</choice>
       <choice ID="CRYPTOGEOLOGY_ExcavatorChoice" GotoID="CRYPTOGEOLOGY_Excavator">What do you think of the excavator?</choice>
@@ -438,7 +438,7 @@
 
     <node ID="CRYPTOGEOLOGY_Excavator">
       <text>
-        It is an invention in process, an aglomeration of several minds' prints preserved in souldering technique.
+        It is an invention in process, an agglomeration of several minds' prints preserved in soldering technique.
       </text>
       <choice UseID="CRYPTOGEOLOGY_ProzemanChoice"/>
       <choice UseID="CRYPTOGEOLOGY_EndChoice"/>
@@ -636,7 +636,7 @@
 
         Rock-sleep long beckoning. Rock-sleep beckoning. Rock becoming. Rock. Rock. Rrr. …
 
-        &amp;w*The last telepathic transmission of the Neurolith reverberates about your brain-space for a few moments longer, and then is silent. Your vision clears, the worm scape decomposing in the heat of waking. You are left with a mound of fossil chips and pulverized sandstone begining to take to the wind.*&amp;y
+        &amp;w*The last telepathic transmission of the Neurolith reverberates about your brain-space for a few moments longer, and then is silent. Your vision clears, the worm scape decomposing in the heat of waking. You are left with a mound of fossil chips and pulverized sandstone beginning to take to the wind.*&amp;y
       </text>
       <choice Target="End">
         <text>...</text>

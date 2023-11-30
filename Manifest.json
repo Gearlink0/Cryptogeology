@@ -1,7 +1,7 @@
 {
 	"id": "Cryptogeology",
 	"loadorder": 1,
-	"title": "{{Cryptogeology}}",
+	"title": "Cryptogeology",
 	"description": "A new face has arrived in the Stiltgrounds who needs help with an ambitious project.\n\nAdds a small sidequest to the game.",
 	"tags": "Quest,Balance,Beta",
 	"version": "1.0",

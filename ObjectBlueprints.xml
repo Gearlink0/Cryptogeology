@@ -23,7 +23,7 @@
     <tag Name="InventoryPopulationTable" Value="CRYPTOGEOLOGY_CryptogeologistInventory" />
     <mutation Name="Clairvoyance" Level="1" />
     <mutation Name="NightVision" Level="10" />
-    <mutation Name="BurrowingClaws" Level="10" CreateObject="false" />
+    <mutation Name="BurrowingClaws" Level="10" PathAsBurrower="false" />
     <tag Name="NoHateFactions" Value="Mechanimists,Pariahs,Wardens" />
     <tag Name="Gender" Value="male" />
     <tag Name="NoSleep" />

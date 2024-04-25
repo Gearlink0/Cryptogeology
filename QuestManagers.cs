@@ -14,7 +14,7 @@ namespace XRL.World.QuestManagers
 			if (this.secretId != null)
       {
 	      JournalMapNote mapNote = JournalAPI.GetMapNote(this.secretId);
-	      if (mapNote != null && !mapNote.revealed)
+	      if (mapNote != null && !mapNote.Revealed)
 	        mapNote.Reveal(false);
 			}
 		}

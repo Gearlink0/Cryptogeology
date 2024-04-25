@@ -6,8 +6,9 @@ namespace XRL.World.Effects
   [Serializable]
   public class CRYPTOGEOLOGY_DistrustEffect : Effect, ITierInitialized
   {
-		public int QuicknessShift = 20;
-		public int MaxDuration = 20;
+    public int QuicknessShift = 20;
+    public int InitialDuration = 20;
+
     [FieldSaveVersion(307)]
     public string Source;
 
@@ -20,13 +21,14 @@ namespace XRL.World.Effects
     }
 
     public CRYPTOGEOLOGY_DistrustEffect(int Duration, int QuicknessShift, GameObject Source)
-      : this(Duration)
+      : this()
     {
+      this.Duration = Duration;
       this.QuicknessShift = QuicknessShift;
-      this.Source = Source.id;
+      this.Source = Source.ID;
     }
 
-    public void Initialize(int Tier) => this.Duration = MaxDuration;
+    public void Initialize(int Tier) => this.Duration = this.InitialDuration;
 
 		public override bool UseStandardDurationCountdown() => true;
 
@@ -63,8 +65,8 @@ namespace XRL.World.Effects
 
     public override bool HandleEvent(BeginTakeActionEvent E)
     {
-      GameObject byId = GameObject.findById(this.Source);
-      if (!GameObject.validate(ref byId) || byId.Equipped != this.Object)
+      GameObject byId = GameObject.FindByID(this.Source);
+      if (!GameObject.Validate(ref byId) || byId.Equipped != this.Object)
         this.Duration = 0;
       return base.HandleEvent(E);
     }

@@ -65,9 +65,9 @@ namespace XRL.World.Parts
               StringBuilder stringBuilder = new StringBuilder();
               stringBuilder.Append("Your head throbs with the wonder of ancient, squirming, things and you piece together a truth:\n\n");
               if( RandomUnrevealedNote as JournalMapNote == null )
-                stringBuilder.Append( RandomUnrevealedNote.text );
+                stringBuilder.Append( RandomUnrevealedNote.Text );
               else
-                stringBuilder.Append( "The location of " ).Append( Grammar.InitLowerIfArticle(RandomUnrevealedNote.text) );
+                stringBuilder.Append( "The location of " ).Append( Grammar.InitLowerIfArticle(RandomUnrevealedNote.Text) );
               Popup.Show(stringBuilder.ToString());
               RandomUnrevealedNote.Reveal();
             }

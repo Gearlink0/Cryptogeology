@@ -1,0 +1,5 @@
+<activatedabilities>
+	<ability Command="CRYPTOGEOLOGY_ActivateDistrustLesson">
+		<UITile Tile="Items/GrowWaryIcon.png" Foreground="y" Detail="R" />
+  </ability>
+</activatedabilities>

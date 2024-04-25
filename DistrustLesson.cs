@@ -12,11 +12,7 @@ namespace XRL.World.Parts
     public int MaxDuration = 20;
     public int Duration = 0;
     public string ActivatedAbilityName = "Grow wary";
-    public string ActivatedAbilityCommandNamePrefix = "ActivateDistrustLesson";
-    [FieldSaveVersion(236)]
-    public string ActivatedAbilityClass;
-    [FieldSaveVersion(236)]
-    public string ActivatedAbilityIcon = "û";
+    public string ActivatedAbilityCommandName = "CRYPTOGEOLOGY_ActivateDistrustLesson";
     [FieldSaveVersion(236)]
     public Guid ActivatedAbilityID;
 
@@ -54,7 +50,7 @@ namespace XRL.World.Parts
 
     public override bool HandleEvent(CommandEvent E)
     {
-      if (E.Command == this.GetActivatedAbilityCommandName() && E.Actor == this.GetActivePartFirstSubject())
+      if (E.Command == this.ActivatedAbilityCommandName && E.Actor == this.GetActivePartFirstSubject())
       {
         XRL.Messages.MessageQueue.AddPlayerMessage("The lesson whispers warriness.");
         E.Actor.ApplyEffect((Effect) new CRYPTOGEOLOGY_DistrustEffect(MaxDuration, Bonus, this.ParentObject));
@@ -66,7 +62,7 @@ namespace XRL.World.Parts
     public override bool HandleEvent(EquippedEvent E)
     {
       E.Actor.RegisterPartEvent((IPart) this, "Desecrated");
-      E.Actor.RegisterPartEvent((IPart) this, this.GetActivatedAbilityCommandName());
+      E.Actor.RegisterPartEvent((IPart) this, this.ActivatedAbilityCommandName);
       this.SetUpActivatedAbility(E.Actor);
       return base.HandleEvent(E);
     }
@@ -74,7 +70,7 @@ namespace XRL.World.Parts
     public override bool HandleEvent(UnequippedEvent E)
     {
       E.Actor.UnregisterPartEvent((IPart) this, "Desecrated");
-      E.Actor.UnregisterPartEvent((IPart) this, this.GetActivatedAbilityCommandName());
+      E.Actor.UnregisterPartEvent((IPart) this, this.ActivatedAbilityCommandName);
       E.Actor.RemoveActivatedAbility(ref this.ActivatedAbilityID);
       return base.HandleEvent(E);
     }
@@ -95,13 +91,18 @@ namespace XRL.World.Parts
         Who = this.GetActivePartFirstSubject();
       if (Who == null)
         return;
-      if (this.ActivatedAbilityID == Guid.Empty)
+      if (this.ActivatedAbilityID == Guid.Empty) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append("You grow wary, gaining +").Append( this.Bonus.ToString() );
+        stringBuilder.Append(" Quickness for ").Append( this.MaxDuration.ToString() );
+        stringBuilder.Append(" rounds. Desecrating a sultan shrine refreshes this ability.");
         this.ActivatedAbilityID = Who.AddActivatedAbility(
-          this.ActivatedAbilityName,
-          this.GetActivatedAbilityCommandName(),
-          this.ActivatedAbilityClass ?? (Who == this.ParentObject ? "Maneuvers" : "Items"),
-          Icon: this.ActivatedAbilityIcon
+          Name: this.ActivatedAbilityName,
+          Command: this.ActivatedAbilityCommandName,
+          Class: "Item",
+          Description: stringBuilder.ToString()
         );
+      }
       else
         this.SyncActivatedAbilityName(Who);
     }
@@ -117,6 +118,5 @@ namespace XRL.World.Parts
       Who.SetActivatedAbilityDisplayName(this.ActivatedAbilityID, this.ActivatedAbilityName);
     }
 
-    public string GetActivatedAbilityCommandName() => this.ActivatedAbilityCommandNamePrefix + this.ParentObject.ID;
   }
 }

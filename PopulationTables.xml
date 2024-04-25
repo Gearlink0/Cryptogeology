@@ -2,7 +2,7 @@
 <populations>
     <population Name="CRYPTOGEOLOGY_CryptogeologistInventory">
       <group Name="Items" Style="pickeach">
-        <object Blueprint="Laser Pistol" CellChance="100" CellFullChance="100" CellType="Chem Cell" />
+        <object Blueprint="Laser Pistol" />
         <object Blueprint="Wide-brimmed Hat" />
         <object Blueprint="Slate Frock" />
         <object Blueprint="Walking Stick" />
@@ -11,7 +11,7 @@
     </population>
 
     <population Name="CRYPTOGEOLOGY_TheDigReward">
-  		<group Style="pickeach">
+  		<group Name="Lessons" Style="pickeach">
   			<object Blueprint="CRYPTOGEOLOGY_SharingLesson" />
   			<object Blueprint="CRYPTOGEOLOGY_CalmLesson" />
   			<object Blueprint="CRYPTOGEOLOGY_WonderLesson" />

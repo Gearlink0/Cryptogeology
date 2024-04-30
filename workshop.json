@@ -1,8 +1,8 @@
 {
   "WorkshopId": 2929976165,
   "Title": "Cryptogeology",
-  "Description": "A new face has arrived in the Stiltgrounds who needs help with an ambitious project. Adds a small sidequest to the game.",
-  "Tags": "Quest,Balance,Beta",
+  "Description": "A new face can be found in the Stiltgrounds. Scientist or charlatan, they have need of a courier to fetch a spare part for their malfunctioning machine and gems to pay.\r\n\r\nThis should make some easy water for a thirsty drifter. In all likelihood, it won’t involve trekking to some of the most dangerous locales this side of the Spindle. Nor is it expected to culminate in an encounter with a psychic rock. That would be preposterous.\r\n\r\nAdds a chain of sidequests to the game, given by a new NPC in the Stiltgrounds.\r\n\r\nAdds four new bracelet items, obtained as a reward at the end of the quest chain.\r\n•\tLesson of Life-Circling. Grants +1 max health for everyone you perform the water ritual with.\r\n•\tLesson of Rock-Life. Provides 50% reduction in the cooldowns of the abilities Menacing Stare and Intimidate. Whenever an attack hits you but does not penetrate, there is a 10% chance you stare down the attacker.\r\n•\tLesson of Wonder-Whys. +1 MA. 10% chance to learn a random secret when you enter a new zone while sated.\r\n•\tLesson of Ruler-Thing Distrust. You can grow wary, gaining +20 Quickness for 20 rounds. Desecrating a Sultan Shrine refreshes this ability.\r\n\r\nThis is just a small snippet of story that Qud inspired me to make, and inject into the game. It is intended to have a similar vibe to the rest of the game, though my ability to mimic the writing of Qud is imperfect. The design of the quest itself is also admittedly very basic and not very Qud like.\r\n\r\nFeedback on the writing and balance of the added items would be appreciated. Hope you enjoy this little thing I made.\r\n\r\nThe code is stored on [url=https://github.com/Gearlink0/Cryptogeology]Github[/url], if you are interested.",
+  "Tags": "Quest,Balance",
   "Visibility": "0",
   "ImagePath": "preview.png"
 }

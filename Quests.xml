@@ -43,7 +43,7 @@
   </quest>
 
   <quest Name="The Dig" Level="3"
-       Manager="CRYPTOGEOLOGY_TheDigManager"
+       System="CRYPTOGEOLOGY_TheDigSystem"
        Accomplishment="You witnessed the discovery of and conversed with the Neurolith."
        Hagiograph="=name= held an accord with the Canyon Carver of old, and graciously agreed to carry its wisdom despite its past transgressions."
        HagiographCategory="Trysts">

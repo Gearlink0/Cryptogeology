@@ -3,7 +3,9 @@
   <quest Name="Retrieve a Spare Part for the Excavator" Level="3"
        Accomplishment="You fetched a replacement part for a cryptogeologist's excavator."
        Hagiograph="=name= commissioned a study of unusual stones from an innovative geologist."
-       HagiographCategory="Trysts">
+       HagiographCategory="Trysts"
+       Gospel="&lt;spice.elements.entity$elements[random].weddingConditions.!random.capitalize&gt;, =name= cemented =player.possessive= friendship with the Geologist's Guild by marrying Prozeman."
+  >
 
     <step Name="Retrieve a Spare Part" XP="0">
       <text>Get a spare part from Q Girl.</text>
@@ -17,7 +19,9 @@
   <quest Name="Retrieve Another Spare Part for the Excavator" Level="3"
        Accomplishment="You fetched another replacement part for a cryptogeologist's excavator."
        Hagiograph="In patient wisdom, =name= showed continued support for the study of unusual stones."
-       HagiographCategory="Trysts">
+       HagiographCategory="Trysts"
+       Gospel="&lt;spice.elements.entity$elements[random].weddingConditions.!random.capitalize&gt;, =name= cemented =player.possessive= friendship with the Geologist's Guild by marrying Prozeman for a second time."
+  >
 
     <step Name="Retrieve a Spare Part" XP="0">
       <text>Get a spare part from Yla Haj.</text>
@@ -31,7 +35,9 @@
   <quest Name="Retrieve Yet Another Spare Part for the Excavator" Level="3"
        Accomplishment="You fetched yet another replacement part for a cryptogeologist's excavator."
        Hagiograph="=name= taught perservearance and dedication to an innovative geologist."
-       HagiographCategory="Trysts">
+       HagiographCategory="Trysts"
+       Gospel="&lt;spice.elements.entity$elements[random].weddingConditions.!random.capitalize&gt;, =name= cemented =player.possessive= friendship with the Geologist's Guild by marrying Prozeman for a third time."
+  >
 
     <step Name="Retrieve a Spare Part" XP="0">
       <text>Get a spare part from Bep.</text>
@@ -46,7 +52,9 @@
        System="CRYPTOGEOLOGY_TheDigSystem"
        Accomplishment="You witnessed the discovery of and conversed with the Neurolith."
        Hagiograph="=name= held an accord with the Canyon Carver of old, and graciously agreed to carry its wisdom despite its past transgressions."
-       HagiographCategory="Trysts">
+       HagiographCategory="Trysts"
+       Gospel="While excavating the vacant flats, =name= came upon a clan of worms carving a canyon. Because of =player.t's= precise digging implement, they accepted =name= into their fold and taught =player.objective= their secrets."
+  >
 
     <step Name="Travel to the Dig Site" XP="250">
       <text>Travel to Prozeman's dig site west of the Six Day Stilt.</text>

@@ -174,7 +174,7 @@
         Live and drink =player.formalAddressTerm=.
       </text>
       <choice ID="MoreWorkChoice" GotoID="MoreWork">Do you have any more work?</choice>
-      <choice ID="ResearchChoice" GotoID="Research">How does the research on the neurolith?</choice>
+      <choice ID="ResearchChoice" GotoID="Research">How goes the research on the neurolith?</choice>
       <choice Target="End">Live and drink.</choice>
     </start>
 

@@ -3,7 +3,7 @@
 	"loadorder": 1,
 	"title": "Cryptogeology",
 	"description": "A new face has arrived in the Stiltgrounds who needs help with an ambitious project.\n\nAdds a small sidequest to the game.",
-	"tags": "Quest,Balance",
+	"tags": "Quest",
 	"version": "1.0",
 	"author": "Gearlink",
 	"previewImage": "thumbnail.jpg"

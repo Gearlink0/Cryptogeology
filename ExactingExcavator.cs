@@ -43,7 +43,7 @@ namespace XRL.World.Parts
     public override bool HandleEvent(TookDamageEvent E)
     {
       if (E.Actor != this.ParentObject)
-        this.ParentObject.pPhysics.BroadcastForHelp(E.Actor);
+        this.ParentObject.Physics.BroadcastForHelp(E.Actor);
       return true;
     }
 

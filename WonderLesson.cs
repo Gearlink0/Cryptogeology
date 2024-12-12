@@ -21,28 +21,28 @@ namespace XRL.World.Parts
       this.WorksOnWearer = true;
     }
 
-    public override void LoadData(SerializationReader Reader)
+    public override void Read(GameObject Basis, SerializationReader Reader)
     {
       this.Visited = Reader.ReadDictionary<string, bool>();
-      base.LoadData(Reader);
+      base.Read(Basis, Reader);
     }
 
-    public override void SaveData(SerializationWriter Writer)
+    public override void Write(GameObject Basis, SerializationWriter Writer)
     {
       Writer.Write<string, bool>(this.Visited);
-      base.SaveData(Writer);
+      base.Write(Basis, Writer);
     }
 
     public override bool AllowStaticRegistration() => false;
 
     public override bool WantEvent(int ID, int cascade) => base.WantEvent(ID, cascade) || ID == GetShortDescriptionEvent.ID;
 
-    public override void Register(GameObject Object)
+    public override void Register(GameObject Object, IEventRegistrar Registrar)
     {
-      Object.RegisterPartEvent((IPart) this, "EnteredCell");
-      Object.RegisterPartEvent((IPart) this, "Equipped");
-      Object.RegisterPartEvent((IPart) this, "Unequipped");
-      base.Register(Object);
+      Registrar.Register("EnteredCell");
+      Registrar.Register("Equipped");
+      Registrar.Register("Unequipped");
+      base.Register(Object, Registrar);
     }
 
     public override bool FireEvent(Event E)
@@ -52,7 +52,7 @@ namespace XRL.World.Parts
         GameObject Subject = this.GetActivePartFirstSubject();
         if (Subject != null && Subject.IsPlayer())
         {
-          Zone CurrentZone = Subject.pPhysics.CurrentCell.ParentZone;
+          Zone CurrentZone = Subject.CurrentCell.ParentZone;
           Stomach Stomach = (Stomach) Subject.GetPart("Stomach");
           if (!CurrentZone.IsWorldMap() && Stomach.HungerLevel == 0)
           {
